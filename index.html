@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<style>
+  body{
+    margin: 0;
+    padding:0;
+
+  }
+  .da{
+    margin: 0 auto;
+    width:1024px;
+    height:640px;
+    border:1px solid #666;
+    position: relative;
+    background-image:url(2116627_11215371914_2.jpg);
+  
+  }
+  .da1{
+
+    width:1024px;
+    height:640px;
+    border:1px solid #666;
+    position:absolute;
+    top: 0;
+    left: 0;
+    background-image:url(485715.jpg);
+    z-index: 500;
+  }
+	#sence{
+    margin:20px 0 20px 50px;
+		width: 600px;
+		height: 595px;
+		position: absolute;
+	  top: 0;
+    left: 0;
+    background-image:url(7577280_174030563165_2.jpg); 
+    overflow: hidden;
+	}
+.tishi1{
+    width: 600px;
+    height: 600px;
+    position: absolute;
+    top: 20px;
+    left: 50px;
+     z-index: 10;
+    background-image:url(240419-1305160P04111.jpg);
+    display: none;
+
+ }
+ .tishi2{
+ width: 600px;
+    height: 600px;
+    position: absolute;
+    top: 20px;
+    left: 50px;
+     z-index: 10;
+    background-image:url(11478380_20015646111_2.jpg);
+    display: none;
+ }
+	.block{
+		width: 56px;
+		height: 56px;
+		float: left;
+    border: 1px solid #666;
+		margin:0 1px 1px 0; 
+    text-align:center;
+    line-height:56px;
+     background: url(depositphotos_5787186-Bag-with-dollars-money-on-pile-of-golden-coins.png)
+	}
+  .liebiao{
+    width: 300px;
+    height: 60%;
+    position: absolute;
+    right: 30px;
+    top:20px;
+  }
+	.she{
+    background: url();
+    color: #fff;
+    font-weight: 400px;
+    font-size: 26px;
+  }
+  .logo{
+    width: 300px;
+    height:114px;
+    background-image:url(u=1409828783,3412227635&fm=21&gp=0.png);
+  }
+	
+	.biaoji{
+    background: url(6515959_160006623197_2.png)
+  }
+		
+ .baozha{
+  background: url(240419-1305160R40113.png)
+ }
+	
+	ul{
+		display: block;
+		list-style: none;
+		text-align: center;
+	}
+	li{  
+    color: red;
+		display: block;
+		text-align: center;
+		list-style: none;
+	  font-family: "楷体";
+    font-size:30px;
+		margin:20px 0 ;
+		cursor:pointer; 
+	}
+  .leishu{
+    color:blue;
+    height: 40px;
+    background: url(dilei.png) no-repeat;
+
+  }
+	input{
+		border: 0;
+		outline:none;
+		border-bottom:1px solid #fff;
+		margin-top: 10px;
+        list-style:none;
+        background: none;
+        color: #fff;
+
+	}
+	#ziti{
+		color: #5F0303;
+		font-size: 20px;
+	    background: none;
+	}
+	.xuanzhong{
+		background: green;
+	}
+	.tcs{
+		color: #F8764E;
+		font-size:35px;
+		font-weight: 800;
+		margin:20px auto ;
+		text-align:center;
+
+	}
+	</style>
+</head>
+<body>
+<div class="da" id="da">
+<div class="da1"></div>
+<div class="liebiao">
+<div class="logo"></div>
+<ul>
+<li class="kaishi">开  始</li>
+<li>
+  <div class="jiandan"><a>简 单<a></div>	
+  <div class="zhongdeng"><a>中 等</a></div>
+  <div class="kunnan"><a>困 难</a></div>
+</li>
+<li class='leishu'>炸弹数量:<span>0</span></li>
+</ul>
+</div>
+ <div class="tishi2"></div>
+ <div class="tishi1"></div>
+<div id="sence"></div>
+</div>	
+</body>
+<script src="./jquery-1.12.0.js">
+</script>
+<script>
+   $(function(){
+   	//全局变量
+   	 var hang;
+   	 var she=[{x:0,y:0},{x:0,y:1},{x:0,y:2}];
+   	 var shiwu ;
+      var zb2id =function(x,y){
+         return x+'-'+y 
+    }
+   	//公用函数
+ $('.da1').on('click',function(){
+        $(this).animate({width:0,height:0,},500);
+        return false;
+    })
+    var jisuan=function(a,b){
+    var num=0;
+    if($('#'+zb2id(a,b-1)).is('.lei')){num++};
+    if($('#'+zb2id(a,b+1)).is('.lei')){num++};
+    if($('#'+zb2id(a-1,b-1)).is('.lei')){num++}
+    if($('#'+zb2id(a-1,b)).is('.lei')){num++}
+    if($('#'+zb2id(a-1,b+1)).is('.lei')){num++}
+    if($('#'+zb2id(a+1,b-1)).is('.lei')){num++}
+    if($('#'+zb2id(a+1,b)).is('.lei')){num++}
+    if($('#'+zb2id(a+1,b+1)).is('.lei')){num++}
+      return  num;
+
+    }
+    $(document).on('contextmenu',false)
+    function zuojian(e){
+       if(e.data.lei){
+       
+        $('.lei').addClass('baozha')
+         $('.tishi2').fadeToggle();
+       }else if($(this).is('.biaoji')){
+        return
+       }else{
+         $(this).toggleClass('she');
+         $(this).text(jisuan(e.data.x,e.data.y))
+         console.log($(this).text(jisuan(e.data.x,e.data.y)))
+       }
+
+    }
+    function youjian(){
+       var leishu=$('.lei').length-1
+        $('.leishu').text(leishu-$('.biaoji.lei').length)
+       if($(this).is('.she')){
+        return
+      }else{
+       
+        $(this).toggleClass('biaoji')
+        if($('.biaoji').length===$('.lei').length){
+        if($('.biaoji.lei').length===$('.lei').length){
+        $('.tishi1').fadeToggle();
+      }
+      }
+    }
+    }
+    function clickHendler(e){
+      if(e.which===1){
+       $.proxy(zuojian,this)(e);
+      }else if(e.which===3){
+      $.proxy(youjian,this)(e);
+      }
+    }
+   
+   	function huachangjing(){
+   	 var i=0,j=0,
+   	 sence=$('#sence'),
+     wh=Math.floor(600/hang);
+      hang = 10;
+     sence.empty();
+     for(;i<hang;i++){
+     	for(j=0;j<hang;j++){
+        var islei=Math.random()>0.91;
+          $('<div>')
+          .addClass(function(){
+            return 'block '+ (islei?'lei':'');
+          })
+          .text(function(){
+            return islei?'lei':'';
+          })
+          .attr('id',zb2id(i,j))
+          .on('mousedown',{x:i,y:j,lei:islei},clickHendler)
+          .appendTo(sence)
+     	}
+     }
+
+   	}
+ $(".kaishi").on('click',function(){
+    $(".tishi1").fadeOut()
+    $(".tishi2").fadeOut()
+    
+    huachangjing()
+        var leishu=$('.lei').length
+        $('.leishu').find('span').text(leishu);
+ })
+ $(".tishi2").on('click',function(){
+  $(".tishi1").fadeOut()
+    $(".tishi2").fadeOut()
+    
+    huachangjing()
+        var leishu=$('.lei').length
+        $('.leishu').find('span').text(leishu);
+ })
+ $(".tishi1").on('click',function(){
+  $(".tishi1").fadeOut()
+    $(".tishi2").fadeOut()
+    
+    huachangjing()
+        var leishu=$('.lei').length
+        $('.leishu').find('span').text(leishu);
+ })
+ $
+
+   });
+</script>
+
+
+</html>
